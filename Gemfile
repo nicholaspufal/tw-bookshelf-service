@@ -8,8 +8,7 @@ gem 'google_drive'
 group :development do
   gem 'pry'
   gem 'shotgun'
-  gem 'guard'
-  gem 'guard-rspec'
+  gem 'capybara'
 end
 
 group :test, :development do
