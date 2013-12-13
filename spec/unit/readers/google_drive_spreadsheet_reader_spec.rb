@@ -26,6 +26,6 @@ describe GoogleDriveSpreadsheetReader do
     reader.get_books("POA")
   end
 
-  it "instantiates a Book for each one coming from the spreadsheet" do
+  xit "instantiates a Book for each one coming from the spreadsheet" do
   end
 end

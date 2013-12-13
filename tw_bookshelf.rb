@@ -3,7 +3,7 @@ require "google_drive"
 require "json"
 require "yaml"
 
-get '/' do
+get '/books' do
   config_file = YAML.load_file("config/config.yml")
   session = GoogleDrive.login(config_file["username"], config_file["password"])
   titles = []

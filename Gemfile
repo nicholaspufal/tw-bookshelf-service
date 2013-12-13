@@ -7,10 +7,11 @@ gem 'google_drive'
 
 group :development do
   gem 'pry'
+  gem 'pry-debugger'
   gem 'shotgun'
-  gem 'capybara'
 end
 
 group :test, :development do
+  gem 'rack-test'
   gem 'rspec'
 end
