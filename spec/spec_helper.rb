@@ -2,6 +2,7 @@ require "rack/test"
 require_relative '../tw_bookshelf.rb'
 Dir[File.expand_path("../../lib/**/*.rb",__FILE__)].each { |file| require file }
 Dir[File.expand_path("../../app/**/*.rb",__FILE__)].each { |file| require file }
+Dir[File.expand_path("../support/**/*.rb",__FILE__)].each { |file| require file }
 
 module RSpecMixin
   include Rack::Test::Methods

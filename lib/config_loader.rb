@@ -1,3 +1,5 @@
+require "YAML"
+
 class ConfigLoader
   def initialize(path)
     @config = load_yaml(path)
