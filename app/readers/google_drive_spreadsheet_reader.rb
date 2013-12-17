@@ -9,8 +9,7 @@ class GoogleDriveSpreadsheetReader
     spreadsheet = create_session.spreadsheet_by_key(@config.key)
     cells = spreadsheet.worksheet_by_title(tab)
 
-    cells.rows.collect do |row| 
-      next if row[0] == "Title"
+    cells.rows[1..-1].collect do |row| 
       BookFactory.generate_book(row)
     end
   end

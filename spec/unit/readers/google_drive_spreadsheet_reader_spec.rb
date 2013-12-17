@@ -29,23 +29,15 @@ describe GoogleDriveSpreadsheetReader do
       reader.get_books("Recife")
     end
 
-    it "delegates to a BookFactory each of the rows" do
-      first_row = ["Designing Social Interfaces (o'reilly | yahoo press)", "1", "Élvio V.", "Pedro Pimentel", "", "@TW", "Saiu da TW e levou o livro"]
-      second_row = ["Other book", "3", "Luis Pereira", "Foolano", "", "with the owner", "Random notes"]
-
-      spreadsheet.stub(:rows).and_return([first_row, second_row])
-
-      BookFactory.should_receive(:generate_book).with(first_row)
-      BookFactory.should_receive(:generate_book).with(second_row)
-
-      books = reader.get_books
-    end
-
-    it "ignores if the first row refers to the title of the column" do
+    it "ignores the first row and delegates to BookFactory each of the other rows" do
       first_row = ["Title", "Copies", "Who is reading?", "Original Owner", "Waiting list", "@TW/With owner", "Comments"]
+      second_row = ["Designing Social Interfaces (o'reilly | yahoo press)", "1", "Élvio V.", "Pedro Pimentel", "", "@TW", "Saiu da TW e levou o livro"]
+      third_row = ["Other book", "3", "Luis Pereira", "Foolano", "", "with the owner", "Random notes"]
 
-      spreadsheet.stub(:rows).and_return([first_row])
-      BookFactory.should_not_receive(:generate_book) 
+      spreadsheet.stub(:rows).and_return([first_row, second_row, third_row])
+
+      BookFactory.should_receive(:generate_book).with(second_row)
+      BookFactory.should_receive(:generate_book).with(third_row)
 
       books = reader.get_books
     end

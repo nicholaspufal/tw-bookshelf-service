@@ -9,9 +9,7 @@ describe Book do
       location: "@TW", 
       waiting_list: "Foolano, Beltrano", 
       who_is_reading: "Foolano, Beltrano", 
-      comments: <<-DOC
-        Lorem ipsum dolor ses main dolo.
-      DOC
+      comments: "Lorem ipsum dolor ses main dolo."
     }
   end
 
@@ -38,14 +36,6 @@ describe Book do
   end
 
   it "is serializable" do
-    book.serialize.should == { 
-      title:          book_values[:title],
-      owner:          book_values[:owner],
-      copies:         book_values[:copies],
-      location:       book_values[:location],
-      comments:       book_values[:comments],
-      waiting_list:   book_values[:waiting_list],
-      who_is_reading: book_values[:who_is_reading]
-    }
+    book.to_json.should == "{\"title\":\"The Art of Agile Development\",\"owner\":\"Nicholas Pufal\",\"copies\":2,\"location\":\"@TW\",\"comments\":\"Lorem ipsum dolor ses main dolo.\",\"waiting_list\":\"Foolano, Beltrano\",\"who_is_reading\":\"Foolano, Beltrano\"}"
   end
 end
