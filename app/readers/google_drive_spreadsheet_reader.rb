@@ -10,7 +10,7 @@ class GoogleDriveSpreadsheetReader
     cells = spreadsheet.worksheet_by_title(tab)
 
     cells.rows.collect do |row| 
-      next if row[0] == "cce"
+      next if row[0] == "Title"
       BookFactory.generate_book(row)
     end
   end

@@ -42,7 +42,7 @@ describe GoogleDriveSpreadsheetReader do
     end
 
     it "ignores if the first row refers to the title of the column" do
-      first_row = ["cce", "Copies", "Who is reading?", "Original Owner", "Waiting list", "@TW/With owner", "Comments"]
+      first_row = ["Title", "Copies", "Who is reading?", "Original Owner", "Waiting list", "@TW/With owner", "Comments"]
 
       spreadsheet.stub(:rows).and_return([first_row])
       BookFactory.should_not_receive(:generate_book) 
