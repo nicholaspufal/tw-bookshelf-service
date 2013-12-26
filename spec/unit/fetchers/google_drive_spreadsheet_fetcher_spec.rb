@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe GoogleDriveSpreadsheetReader do
+describe GoogleDriveSpreadsheetFetcher do
   let(:config) { double("a interpreted config file", username: "foo", password: "bar", key: "0AsVBDHxiMgLbdEtXVG5wNUwyLVVYYTY2NEVxUzRmVlE") }
-  let(:reader) { GoogleDriveSpreadsheetReader.new(config) }
+  let(:reader) { GoogleDriveSpreadsheetFetcher.new(config) }
 
   context "session not opened yet" do
     it "connects to Google Drive using the configuration values" do

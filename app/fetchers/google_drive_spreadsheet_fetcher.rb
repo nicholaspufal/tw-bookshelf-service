@@ -1,6 +1,6 @@
 require "google_drive"
 
-class GoogleDriveSpreadsheetReader
+class GoogleDriveSpreadsheetFetcher
   def initialize(config)
     @config = config
   end
