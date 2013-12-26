@@ -11,8 +11,12 @@ class ConfigLoader
     @config.fetch("password")
   end
 
-  def key
-    @config.fetch("key")
+  def spreadsheet_key
+    @config.fetch("spreadsheet_key")
+  end
+
+  def google_books_api_key
+    @config.fetch("google_books_api_key")
   end
 
   private

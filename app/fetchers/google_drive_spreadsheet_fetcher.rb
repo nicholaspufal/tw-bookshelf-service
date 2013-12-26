@@ -1,16 +1,17 @@
 require "google_drive"
 
 class GoogleDriveSpreadsheetFetcher
-  def initialize(config)
+  def initialize(config, book_factory)
     @config = config
+    @book_factory = book_factory
   end
 
   def get_books(tab = "POA")
-    spreadsheet = create_session.spreadsheet_by_key(@config.key)
+    spreadsheet = create_session.spreadsheet_by_key(@config.spreadsheet_key)
     cells = spreadsheet.worksheet_by_title(tab)
 
     cells.rows[1..-1].collect do |row| 
-      BookFactory.generate_book(row)
+      @book_factory.generate_book(row)
     end
   end
 

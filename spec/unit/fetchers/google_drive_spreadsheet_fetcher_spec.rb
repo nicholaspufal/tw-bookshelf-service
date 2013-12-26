@@ -1,8 +1,9 @@
 require "spec_helper"
 
 describe GoogleDriveSpreadsheetFetcher do
-  let(:config) { double("a interpreted config file", username: "foo", password: "bar", key: "0AsVBDHxiMgLbdEtXVG5wNUwyLVVYYTY2NEVxUzRmVlE") }
-  let(:reader) { GoogleDriveSpreadsheetFetcher.new(config) }
+  let(:config) { double("a interpreted config file", username: "foo", password: "bar", spreadsheet_key: "0AsVBDHxiMgLbdEtXVG5wNUwyLVVYYTY2NEVxUzRmVlE") }
+  let(:book_factory) { double("a book factory") }
+  let(:reader) { GoogleDriveSpreadsheetFetcher.new(config, book_factory) }
 
   context "session not opened yet" do
     it "connects to Google Drive using the configuration values" do
@@ -36,8 +37,8 @@ describe GoogleDriveSpreadsheetFetcher do
 
       spreadsheet.stub(:rows).and_return([first_row, second_row, third_row])
 
-      BookFactory.should_receive(:generate_book).with(second_row)
-      BookFactory.should_receive(:generate_book).with(third_row)
+      book_factory.should_receive(:generate_book).with(second_row)
+      book_factory.should_receive(:generate_book).with(third_row)
 
       books = reader.get_books
     end

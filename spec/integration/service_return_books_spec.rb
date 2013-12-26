@@ -10,7 +10,8 @@ describe "service return all the books" do
       "owner"           => "Bruno Tavares",
       "waiting_list"    => nil,
       "location"        => "@TW",
-      "comments"        => nil
+      "comments"        => nil,
+      "cover"           => nil
     }
 
     get "/books/POA"
@@ -26,7 +27,8 @@ describe "service return all the books" do
       "owner"           => "Henrique R R",
       "waiting_list"    => nil,
       "location"        => "@TW",
-      "comments"        => nil
+      "comments"        => nil,
+      "cover"           => "http://bks1.books.google.com.br/books?id=ebMc469Ai68C&printsec=frontcover&img=1&zoom=1&edge=none&source=gbs_api"
     }
 
     get "/books/Recife"

@@ -1,7 +1,7 @@
 require "json"
 
 class Book
-  attr_accessor :title, :owner, :copies, :location, :comments, :waiting_list, :who_is_reading
+  attr_accessor :title, :owner, :copies, :location, :comments, :waiting_list, :who_is_reading, :cover
 
   def to_json(*a)
     {
@@ -11,7 +11,8 @@ class Book
       "location"        => location,
       "comments"        => comments,
       "waiting_list"    => waiting_list,
-      "who_is_reading"  => who_is_reading 
+      "who_is_reading"  => who_is_reading,
+      "cover"           => cover
     }.to_json(*a)
   end
 end
