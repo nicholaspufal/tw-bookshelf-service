@@ -1,5 +1,3 @@
-require 'googlebooks'
-
 class BookCoverFetcher
   def initialize(config)
     @config = config

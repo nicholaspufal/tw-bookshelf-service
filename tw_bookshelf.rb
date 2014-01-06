@@ -1,11 +1,9 @@
-require "sinatra"
+Mongoid.load!("config/mongoid.yml")
 Dir[File.expand_path("../app/**/*.rb",__FILE__)].each { |file| require file }
 Dir[File.expand_path("../lib/**/*.rb",__FILE__)].each { |file| require file }
 
-get '/books/:tab_name' do
+get '/books/:office_name' do
   config = ConfigLoader.new("config/config.yml")
-  book_factory = BookFactory.new(config)
-  reader = GoogleDriveSpreadsheetFetcher.new(config, book_factory)
-  books = reader.get_books(params["tab_name"])
+  books = BookFetcher.find_by_office(params["office_name"])
   books.to_json
 end

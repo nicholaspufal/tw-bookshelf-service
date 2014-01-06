@@ -1,5 +1,4 @@
 require "spec_helper"
-require "json"
 
 describe "service return all the books" do
   it "GET /books/POA" do
@@ -11,10 +10,11 @@ describe "service return all the books" do
       "waiting_list"    => nil,
       "location"        => "@TW",
       "comments"        => nil,
-      "cover"           => nil
+      "cover"           => nil,
+      "office"          => "poa"
     }
 
-    get "/books/POA"
+    get "/books/poa"
   
     JSON.parse(last_response.body).first.should == expected_json
   end
@@ -28,10 +28,11 @@ describe "service return all the books" do
       "waiting_list"    => nil,
       "location"        => "@TW",
       "comments"        => nil,
-      "cover"           => "http://bks1.books.google.com.br/books?id=ebMc469Ai68C&printsec=frontcover&img=1&zoom=1&edge=none&source=gbs_api"
+      "cover"           => "http://bks1.books.google.com.br/books?id=ebMc469Ai68C&printsec=frontcover&img=1&zoom=1&edge=none&source=gbs_api",
+      "office"          => "recife"
     }
 
-    get "/books/Recife"
+    get "/books/recife"
   
     JSON.parse(last_response.body).first.should == expected_json
   end

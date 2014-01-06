@@ -3,8 +3,8 @@ ruby '2.0.0'
 
 gem 'sinatra'
 gem 'rake'
-gem 'google_drive'
 gem 'googlebooks'
+gem "mongoid", "~> 3.0.0"
 
 group :development do
   gem 'pry'
@@ -15,4 +15,6 @@ end
 group :test, :development do
   gem 'rack-test'
   gem 'rspec'
+  gem 'mongoid-rspec'
 end
+
