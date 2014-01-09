@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
+gem 'newrelic_rpm'
 gem 'sinatra'
 gem 'rake'
 gem 'googlebooks'
@@ -16,8 +17,4 @@ group :test, :development do
   gem 'rack-test'
   gem 'rspec'
   gem 'mongoid-rspec'
-end
-
-group :production do
-  gem 'newrelic_rpm'
 end
