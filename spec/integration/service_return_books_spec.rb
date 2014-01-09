@@ -3,14 +3,14 @@ require "spec_helper"
 describe "service return all the books" do
   it "GET /books/POA" do
     expected_json = {
-      "title"           => "30 anos de Enduro da Indepêndencia",
-      "copies"          => 1,
+      "title"           => "",
+      "copies"          => 0,
       "who_is_reading"  => nil,
-      "owner"           => "Bruno Tavares",
+      "owner"           => "Lourenço Soares",
       "waiting_list"    => nil,
       "location"        => "@TW",
       "comments"        => nil,
-      "cover"           => nil,
+      "cover"           => "http://bks2.books.google.com.br/books?id=bvB1-MmhEjQC&printsec=frontcover&img=1&zoom=1&edge=none&source=gbs_api",
       "office"          => "poa"
     }
 
