@@ -18,3 +18,6 @@ group :test, :development do
   gem 'mongoid-rspec'
 end
 
+group :production do
+  gem 'newrelic_rpm'
+end

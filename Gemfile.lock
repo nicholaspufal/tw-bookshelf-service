@@ -37,6 +37,7 @@ GEM
     moped (1.5.1)
     multi_json (1.8.2)
     multi_xml (0.5.5)
+    newrelic_rpm (3.7.1.182)
     origin (1.1.0)
     pry (0.9.12.4)
       coderay (~> 1.0)
@@ -76,6 +77,7 @@ DEPENDENCIES
   googlebooks
   mongoid (~> 3.0.0)
   mongoid-rspec
+  newrelic_rpm
   pry
   pry-debugger
   rack-test
