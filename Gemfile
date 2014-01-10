@@ -4,6 +4,7 @@ ruby '2.0.0'
 gem 'newrelic_rpm'
 gem 'sinatra'
 gem 'rake'
+gem 'googlebooks'
 gem "mongoid", "~> 3.0.0"
 
 group :development do
