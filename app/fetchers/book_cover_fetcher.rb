@@ -1,10 +1,6 @@
 class BookCoverFetcher
-  def initialize(config)
-    @config = config
-  end
-
-  def find_by_title(title)
-    book = GoogleBooks.search("intitle:#{title}", api_key: @config.google_books_api_key).first
+  def self.find_by_title(title, api_key)
+    book = GoogleBooks.search("intitle:#{title}", api_key: api_key).first
     book.image_link(zoom: 1) unless book.nil?
   end
 end
