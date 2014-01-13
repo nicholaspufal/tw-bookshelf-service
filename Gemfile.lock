@@ -68,6 +68,8 @@ GEM
       debugger (~> 1.3)
       pry (~> 0.9.10)
     rack (1.5.2)
+    rack-cache (1.2)
+      rack (>= 0.4)
     rack-protection (1.5.1)
       rack
     rack-test (0.6.2)
@@ -102,6 +104,7 @@ DEPENDENCIES
   newrelic_rpm
   pry
   pry-debugger
+  rack-cache
   rack-test
   rake
   rspec

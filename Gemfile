@@ -7,6 +7,7 @@ gem 'sinatra'
 gem 'rake'
 gem 'googlebooks'
 gem "mongoid", "~> 3.0.0"
+gem 'rack-cache'
 
 group :development do
   gem 'pry'
