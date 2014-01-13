@@ -23,3 +23,29 @@ task :update_book_covers do
   end
   puts "Task finished."
 end
+
+desc "Make a check for new books added to the spreadsheet and add them to the service database"
+task :add_new_books do
+  config = ConfigLoader.new(config_file)
+  spreadsheet = BookSpreadsheetFetcher.new(config)
+  books_poa = spreadsheet.get_books("POA")
+  books_recife = spreadsheet.get_books("Recife")
+  books = books_poa + books_recife
+
+  books.each do |book| 
+    unless Book.where(title: book.title).exists?
+      Book.create(
+        title:          book.title,
+        copies:         book.copies,
+        waiting_list:   book.waiting_list,
+        owner:          book.owner,
+        location:       book.location,
+        who_is_reading: book.who_is_reading,
+        cover:          book.cover,
+        cooments:       book.comments,
+        office:         book.office
+      )
+      puts "New book found and added: {title: #{book.title}, owner: #{book.owner}, copies: #{book.copies}, waiting_list: #{book.waiting_list}}"
+    end
+  end
+end
