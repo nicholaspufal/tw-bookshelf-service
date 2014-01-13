@@ -27,6 +27,7 @@ end
 desc "Make a check for new books added to the spreadsheet and add them to the service database"
 task :add_new_books do
   config = ConfigLoader.new(config_file)
+  puts "Searching for new books in the spreadsheet..."
   spreadsheet = BookSpreadsheetFetcher.new(config)
   books_poa = spreadsheet.get_books("POA")
   books_recife = spreadsheet.get_books("Recife")
@@ -48,4 +49,5 @@ task :add_new_books do
       puts "New book found and added: {title: #{book.title}, owner: #{book.owner}, copies: #{book.copies}, waiting_list: #{book.waiting_list}}"
     end
   end
+  puts "Task finished."
 end
