@@ -4,9 +4,13 @@ Dir[File.expand_path("../lib/**/*.rb",__FILE__)].each { |file| require file }
 
 use Rack::Cache, verbose: false
 
-get '/books/:office_name' do
+before do
   cache_control :public, :max_age => 3600
   response.headers["Access-Control-Allow-Origin"] = "*"
+  response.headers["Content-Type"] = "application/json"
+end
+
+get '/books/:office_name' do
   books = BookFetcher.find_by_office(params["office_name"])
   books.to_json
 end
