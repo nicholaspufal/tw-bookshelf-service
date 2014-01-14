@@ -24,17 +24,30 @@ task :update_book_covers do
   puts "Task finished."
 end
 
-desc "Make a check for new books added to the spreadsheet and add them to the service database"
-task :add_new_books do
+# temporary task, until we create the endpoints in the service and can get rid of the spreadsheet
+desc "Make a check for books added/updated in the spreadsheet and send it to MongoDB if changes are detected"
+task :sync_books do
   config = ConfigLoader.new(config_file)
-  puts "Searching for new books in the spreadsheet..."
+  puts "Searching for new/updated books in the spreadsheet..."
   spreadsheet = BookSpreadsheetFetcher.new(config)
   books_poa = spreadsheet.get_books("POA")
   books_recife = spreadsheet.get_books("Recife")
   books = books_poa + books_recife
 
   books.each do |book| 
-    unless Book.where(title: book.title).exists?
+    db_book = Book.where(title: book.title, office: book.office).first
+    if db_book.present? && book_changed?(book, db_book)
+      Book.where(title: book.title, office: book.office)
+          .update(
+            copies:         book.copies,
+            waiting_list:   book.waiting_list,
+            owner:          book.owner,
+            location:       book.location,
+            who_is_reading: book.who_is_reading,
+            comments:       book.comments,
+          )
+      puts "Book updated: {title: #{book.title}, office: #{book.office}, owner: #{book.owner}, copies: #{book.copies}, waiting_list: #{book.waiting_list}}"
+    elsif !db_book.present?
       Book.create(
         title:          book.title,
         copies:         book.copies,
@@ -43,11 +56,22 @@ task :add_new_books do
         location:       book.location,
         who_is_reading: book.who_is_reading,
         cover:          book.cover,
-        cooments:       book.comments,
+        comments:       book.comments,
         office:         book.office
       )
-      puts "New book found and added: {title: #{book.title}, owner: #{book.owner}, copies: #{book.copies}, waiting_list: #{book.waiting_list}}"
+      puts "New book added: {title: #{book.title}, office: #{book.office}, owner: #{book.owner}, copies: #{book.copies}, waiting_list: #{book.waiting_list}}"
     end
   end
+
   puts "Task finished."
+end
+
+def book_changed?(spreadsheet_book, db_book)
+  fields = db_book.fields.keys - %w(_id _type cover office)
+
+  fields.each do |field|
+    return true if spreadsheet_book.send(field) != db_book.send(field)
+  end
+
+  return false
 end
